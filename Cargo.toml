@@ -1,0 +1,12 @@
+[package]
+name = "anaso_site_api_models"
+version = "0.0.1"
+license = "MIT OR Apache-2.0"
+authors = ["Brandon Dyer <brandono@ana.so>"]
+repository = "https://github.com/Anaso-Internacia/anaso_site_api_models"
+edition = "2021"
+
+[dependencies]
+bitflags = { version = "2.6", features = ["serde"] }
+serde = { version = "1", features = ["derive", "rc"] }
+serde_with = "3"
