@@ -22,7 +22,7 @@ pub struct VisualSection {
     /// Name to display for the section.
     pub title: Option<Rc<str>>,
     /// Should the section be drawn with a border around it.
-    pub bordered: Option<Rc<str>>,
+    pub bordered: Option<bool>,
     /// The actual section.
     #[serde_as(as = "DefaultOnError")]
     pub section: Section,

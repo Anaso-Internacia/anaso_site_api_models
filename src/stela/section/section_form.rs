@@ -16,7 +16,7 @@ pub struct SectionForm {
 }
 
 /// Individual input field.
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Deserialize, Serialize)]
 pub struct FormInput {
     /// Human-readable name.
     pub title: Option<Rc<str>>,
