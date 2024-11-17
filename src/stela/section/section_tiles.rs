@@ -1,4 +1,4 @@
-use std::rc::Rc;
+use std::sync::Arc;
 
 use serde::{Deserialize, Serialize};
 
@@ -19,15 +19,15 @@ pub struct SectionTiles {
 #[derive(Debug, Deserialize, Serialize)]
 pub struct Tile {
     /// Primary text.
-    pub header: Option<Rc<str>>,
+    pub header: Option<Arc<str>>,
     /// Secondary text.
-    pub subheader: Option<Rc<str>>,
+    pub subheader: Option<Arc<str>>,
     /// What to do when clicked.
     pub motion: Option<Motion>,
     /// Both thumbnail and background.
     pub image: Option<Image>,
     /// Show text instead of thumbnail.
-    pub body_text: Option<Rc<str>>,
+    pub body_text: Option<Arc<str>>,
 }
 
 /// How to layout tiles.

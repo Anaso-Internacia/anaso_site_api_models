@@ -1,4 +1,4 @@
-use std::rc::Rc;
+use std::sync::Arc;
 
 use serde::{Deserialize, Serialize};
 use serde_with::{serde_as, DefaultOnError};
@@ -20,7 +20,7 @@ mod section_tiles;
 #[derive(Clone, Debug, Deserialize, Serialize)]
 pub struct VisualSection {
     /// Name to display for the section.
-    pub title: Option<Rc<str>>,
+    pub title: Option<Arc<str>>,
     /// Should the section be drawn with a border around it.
     pub bordered: Option<bool>,
     /// The actual section.
@@ -34,15 +34,15 @@ pub struct VisualSection {
 #[derive(Clone, Debug, Default, Deserialize, Serialize)]
 pub enum Section {
     /// Fill something out and submit.
-    Form(Rc<SectionForm>),
+    Form(Arc<SectionForm>),
     /// Some grand information.
-    Hero(Rc<SectionHero>),
+    Hero(Arc<SectionHero>),
     /// User-generated content
-    Post(Rc<SectionPost>),
+    Post(Arc<SectionPost>),
     /// Ads. Gotta make money.
-    Sponsor(Rc<SectionSponsor>),
+    Sponsor(Arc<SectionSponsor>),
     /// List of clickable tiles.
-    Tiles(Rc<SectionTiles>),
+    Tiles(Arc<SectionTiles>),
     /// Section couldn't be parsed or the type is unknown.
     #[default]
     #[serde(other)]

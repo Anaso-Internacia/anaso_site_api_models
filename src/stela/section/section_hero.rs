@@ -1,4 +1,4 @@
-use std::rc::Rc;
+use std::sync::Arc;
 
 use serde::{Deserialize, Serialize};
 
@@ -8,5 +8,5 @@ use crate::stela::Hero;
 #[derive(Debug, Deserialize, Serialize)]
 pub struct SectionHero {
     /// The hero to show.
-    pub hero: Rc<Hero>,
+    pub hero: Arc<Hero>,
 }

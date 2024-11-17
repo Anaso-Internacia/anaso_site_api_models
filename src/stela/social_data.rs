@@ -1,4 +1,4 @@
-use std::rc::Rc;
+use std::sync::Arc;
 
 use serde::{Deserialize, Serialize};
 
@@ -15,5 +15,5 @@ pub struct SocialData {
     ///     ("og:url", "https://ana.so/a/Hejmo"),
     /// ]
     /// ```
-    pub tags: Vec<(Rc<str>, Rc<str>)>,
+    pub tags: Vec<(Arc<str>, Arc<str>)>,
 }

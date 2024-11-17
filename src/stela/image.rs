@@ -1,4 +1,4 @@
-use std::rc::Rc;
+use std::sync::Arc;
 
 use serde::{Deserialize, Serialize};
 
@@ -16,5 +16,5 @@ pub struct Image {
     /// Cloudflare image storage id.
     ///
     /// This will _usually_ be a UUID, but it's not guaranteed to be.
-    pub id: Rc<str>,
+    pub id: Arc<str>,
 }

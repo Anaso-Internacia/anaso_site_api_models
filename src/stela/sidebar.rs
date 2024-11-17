@@ -1,4 +1,4 @@
-use std::rc::Rc;
+use std::sync::Arc;
 
 use serde::{Deserialize, Serialize};
 
@@ -15,9 +15,9 @@ pub struct Sidebar {
 #[derive(Debug, Deserialize, Serialize)]
 pub struct SidebarCard {
     /// Headr text at the top.
-    pub title: Rc<str>,
+    pub title: Arc<str>,
     /// Main text.
-    pub body: Rc<str>,
+    pub body: Arc<str>,
     /// Buttons underneath body.
     pub motions: Vec<VisualMotion>,
 }

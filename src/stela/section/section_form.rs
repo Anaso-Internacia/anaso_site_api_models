@@ -1,4 +1,4 @@
-use std::rc::Rc;
+use std::sync::Arc;
 
 use serde::{Deserialize, Serialize};
 
@@ -8,9 +8,9 @@ use crate::stela::VisualMotion;
 #[derive(Debug, Deserialize, Serialize)]
 pub struct SectionForm {
     /// Primary text at top.
-    pub header: Option<Rc<str>>,
+    pub header: Option<Arc<str>>,
     /// Secondary text under header.
-    pub subheader: Option<Rc<str>>,
+    pub subheader: Option<Arc<str>>,
     /// Individual input fields.
     pub inputs: Vec<FormInput>,
 }
@@ -19,7 +19,7 @@ pub struct SectionForm {
 #[derive(Clone, Debug, Deserialize, Serialize)]
 pub struct FormInput {
     /// Human-readable name.
-    pub title: Option<Rc<str>>,
+    pub title: Option<Arc<str>>,
     /// What kind of field is it.
     pub variant: FormInputVariant,
 }
@@ -28,19 +28,19 @@ pub struct FormInput {
 #[derive(Clone, Debug, Default, Deserialize, Serialize)]
 pub enum FormInputVariant {
     /// Toggle on or off.
-    Checkbox(Rc<FormInputCheckbox>),
+    Checkbox(Arc<FormInputCheckbox>),
     /// Upload an image.
-    Image(Rc<FormInputImage>),
+    Image(Arc<FormInputImage>),
     /// Type full markdown.
-    Markdown(Rc<FormInputMarkdown>),
+    Markdown(Arc<FormInputMarkdown>),
     /// A list of motions.
-    Motions(Rc<FormInputMotions>),
+    Motions(Arc<FormInputMotions>),
     /// Select from multiple options.
-    Radio(Rc<FormInputRadio>),
+    Radio(Arc<FormInputRadio>),
     /// A smaller form with a title inside the full form.
-    Subsection(Rc<FormInputSubsection>),
+    Subsection(Arc<FormInputSubsection>),
     /// Type text.
-    Text(Rc<FormInputText>),
+    Text(Arc<FormInputText>),
     /// Unknown form input.
     #[default]
     #[serde(other)]
@@ -58,7 +58,7 @@ pub struct FormInputSubsection {
 #[derive(Debug, Deserialize, Serialize)]
 pub struct FormInputText {
     /// What to put in form-data for the API.
-    pub name: Option<Rc<str>>,
+    pub name: Option<Arc<str>>,
     /// Minimum character count.
     pub length_min: Option<i32>,
     /// Maximum character count.
@@ -94,7 +94,7 @@ bitflags::bitflags! {
 #[derive(Debug, Deserialize, Serialize)]
 pub struct FormInputImage {
     /// What to put in form-data for the API.
-    pub name: Option<Rc<str>>,
+    pub name: Option<Arc<str>>,
     /// How to show the image after upload.
     pub preview_style: ImagePreviewStyle,
 }
@@ -118,7 +118,7 @@ pub enum ImagePreviewStyle {
 #[derive(Debug, Deserialize, Serialize)]
 pub struct FormInputMarkdown {
     /// What to put in form-data for the API.
-    pub name: Rc<str>,
+    pub name: Arc<str>,
     /// Minimum character count.
     pub length_min: Option<i32>,
     /// Maximum character count.
@@ -131,7 +131,7 @@ pub struct FormInputMarkdown {
 #[derive(Debug, Deserialize, Serialize)]
 pub struct FormInputRadio {
     /// What to put in form-data for the API.
-    pub name: Rc<str>,
+    pub name: Arc<str>,
     /// Individual selectable options.
     pub options: Vec<RadioButton>,
 }
@@ -140,16 +140,16 @@ pub struct FormInputRadio {
 #[derive(Debug, Deserialize, Serialize)]
 pub struct RadioButton {
     /// What to put in form-data for the API.
-    pub value: Rc<str>,
+    pub value: Arc<str>,
     /// Human-readable text for option.
-    pub title: Option<Rc<str>>,
+    pub title: Option<Arc<str>>,
 }
 
 /// Toggle on or off.
 #[derive(Debug, Deserialize, Serialize)]
 pub struct FormInputCheckbox {
     /// What to put in form-data for the API.
-    pub name: Rc<str>,
+    pub name: Arc<str>,
     /// Should it start checked.
     pub default_checked: Option<bool>,
 }

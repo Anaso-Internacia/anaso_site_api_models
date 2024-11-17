@@ -1,4 +1,4 @@
-use std::rc::Rc;
+use std::sync::Arc;
 
 use serde::{Deserialize, Serialize};
 
@@ -8,7 +8,7 @@ use crate::stela::Modal;
 #[derive(Clone, Debug, Deserialize, Serialize)]
 pub struct VisualMotion {
     /// Primary button text.
-    pub title: Option<Rc<str>>,
+    pub title: Option<Arc<str>>,
     /// Slug for the button icon.
     pub icon: Option<MotionIcon>,
     /// Whether the button should be in a toggled on state initially.
@@ -24,21 +24,31 @@ pub struct VisualMotion {
 /// Show an icon as part of the motion.
 #[derive(Clone, Debug, Default, Deserialize, Serialize, PartialEq, Eq)]
 pub enum MotionIcon {
-    /// Speech bubble.
-    Comment,
-    /// Heart.
-    Like,
-    /// Shield.
-    Moderation,
-    /// Push pin.
-    Pin,
-    /// Fat arrow pointing right.
-    Share,
-    /// Toggle.
+    /// phosphor: chat-circle
+    ChatCircle,
+    /// phosphor: globe-hemisphere-west
+    GlobeHemisphereWest,
+    /// phosphor: heart
+    Heart,
+    /// phosphor: plus
+    Plus,
+    /// phosphor: push-pin
+    PushPin,
+    /// phosphor: share-fat
+    ShareFat,
+    /// phosphor: shield
+    Shield,
+    /// phosphor: sign-in
+    SignIn,
+    /// phosphor: sign-out
+    SignOut,
+    /// phosphor: toggle
     Toggle,
-    /// Show a fallback icon.
-    ///
-    /// This doesn't mean don't show an icon. It means show tofu.
+    /// phosphor: flag
+    Flag,
+    /// phosphor: user-circle
+    UserCircle,
+    /// phosphor: placeholder
     #[default]
     #[serde(other)]
     Unknown,
@@ -82,13 +92,13 @@ pub enum MotionColor {
 #[derive(Clone, Debug, Default, Deserialize, Serialize)]
 pub enum Motion {
     /// Call the `motion_interaction` endpoint and do something with the response.
-    ApiCall(Rc<MotionApiCall>),
+    ApiCall(Arc<MotionApiCall>),
     /// Navigate to this link.
-    Href(Rc<MotionHref>),
+    Href(Arc<MotionHref>),
     /// Show a share dialogue.
-    Share(Rc<MotionShare>),
+    Share(Arc<MotionShare>),
     /// Submit the form.
-    Submit(Rc<MotionSubmit>),
+    Submit(Arc<MotionSubmit>),
     /// Unrecognized motion.
     #[default]
     #[serde(other)]
@@ -101,16 +111,16 @@ pub struct MotionApiCall {
     /// If `Some`, change the toggle to this new value.
     pub new_toggle: Option<bool>,
     /// Show a pop-up.
-    pub modal: Option<Rc<Modal>>,
+    pub modal: Option<Arc<Modal>>,
     /// Send the user to the given URI.
-    pub redirect: Option<Rc<str>>,
+    pub redirect: Option<Arc<str>>,
 }
 
 /// Navigate to this link.
 #[derive(Debug, Deserialize, Serialize)]
 pub struct MotionHref {
     /// Where to go.
-    pub uri: Rc<str>,
+    pub uri: Arc<str>,
     /// target="_blank"
     pub new_tab: Option<bool>,
 }
@@ -119,11 +129,11 @@ pub struct MotionHref {
 #[derive(Debug, Deserialize, Serialize)]
 pub struct MotionShare {
     /// Title to be shared.
-    pub title: Option<Rc<str>>,
+    pub title: Option<Arc<str>>,
     /// Text to be shared.
-    pub text: Option<Rc<str>>,
+    pub text: Option<Arc<str>>,
     /// Url to be shared.
-    pub url: Option<Rc<str>>,
+    pub url: Option<Arc<str>>,
 }
 
 /// Submit the form.
