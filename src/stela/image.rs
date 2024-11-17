@@ -1,5 +1,3 @@
-use std::sync::Arc;
-
 use serde::{Deserialize, Serialize};
 
 /// Image ID, and other useful info.
@@ -16,5 +14,5 @@ pub struct Image {
     /// Cloudflare image storage id.
     ///
     /// This will _usually_ be a UUID, but it's not guaranteed to be.
-    pub id: Arc<str>,
+    pub id: String,
 }

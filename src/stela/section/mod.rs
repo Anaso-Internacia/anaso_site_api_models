@@ -20,7 +20,7 @@ mod section_tiles;
 #[derive(Clone, Debug, Deserialize, Serialize)]
 pub struct VisualSection {
     /// Name to display for the section.
-    pub title: Option<Arc<str>>,
+    pub title: Option<String>,
     /// Should the section be drawn with a border around it.
     pub bordered: Option<bool>,
     /// The actual section.

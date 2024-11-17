@@ -8,7 +8,7 @@ use crate::stela::Modal;
 #[derive(Clone, Debug, Deserialize, Serialize)]
 pub struct VisualMotion {
     /// Primary button text.
-    pub title: Option<Arc<str>>,
+    pub title: Option<String>,
     /// Slug for the button icon.
     pub icon: Option<MotionIcon>,
     /// Whether the button should be in a toggled on state initially.
@@ -113,14 +113,14 @@ pub struct MotionApiCall {
     /// Show a pop-up.
     pub modal: Option<Arc<Modal>>,
     /// Send the user to the given URI.
-    pub redirect: Option<Arc<str>>,
+    pub redirect: Option<String>,
 }
 
 /// Navigate to this link.
 #[derive(Debug, Deserialize, Serialize)]
 pub struct MotionHref {
     /// Where to go.
-    pub uri: Arc<str>,
+    pub uri: String,
     /// target="_blank"
     pub new_tab: Option<bool>,
 }
@@ -129,11 +129,11 @@ pub struct MotionHref {
 #[derive(Debug, Deserialize, Serialize)]
 pub struct MotionShare {
     /// Title to be shared.
-    pub title: Option<Arc<str>>,
+    pub title: Option<String>,
     /// Text to be shared.
-    pub text: Option<Arc<str>>,
+    pub text: Option<String>,
     /// Url to be shared.
-    pub url: Option<Arc<str>>,
+    pub url: Option<String>,
 }
 
 /// Submit the form.

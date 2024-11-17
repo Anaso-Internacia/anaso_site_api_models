@@ -1,5 +1,3 @@
-use std::sync::Arc;
-
 use serde::{Deserialize, Serialize};
 
 /// Website meta tags.
@@ -15,5 +13,5 @@ pub struct SocialData {
     ///     ("og:url", "https://ana.so/a/Hejmo"),
     /// ]
     /// ```
-    pub tags: Vec<(Arc<str>, Arc<str>)>,
+    pub tags: Vec<(String, String)>,
 }

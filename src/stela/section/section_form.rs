@@ -8,9 +8,9 @@ use crate::stela::VisualMotion;
 #[derive(Debug, Deserialize, Serialize)]
 pub struct SectionForm {
     /// Primary text at top.
-    pub header: Option<Arc<str>>,
+    pub header: Option<String>,
     /// Secondary text under header.
-    pub subheader: Option<Arc<str>>,
+    pub subheader: Option<String>,
     /// Individual input fields.
     pub inputs: Vec<FormInput>,
 }
@@ -19,7 +19,7 @@ pub struct SectionForm {
 #[derive(Clone, Debug, Deserialize, Serialize)]
 pub struct FormInput {
     /// Human-readable name.
-    pub title: Option<Arc<str>>,
+    pub title: Option<String>,
     /// What kind of field is it.
     pub variant: FormInputVariant,
 }
@@ -58,7 +58,7 @@ pub struct FormInputSubsection {
 #[derive(Debug, Deserialize, Serialize)]
 pub struct FormInputText {
     /// What to put in form-data for the API.
-    pub name: Option<Arc<str>>,
+    pub name: Option<String>,
     /// Minimum character count.
     pub length_min: Option<i32>,
     /// Maximum character count.
@@ -94,7 +94,7 @@ bitflags::bitflags! {
 #[derive(Debug, Deserialize, Serialize)]
 pub struct FormInputImage {
     /// What to put in form-data for the API.
-    pub name: Option<Arc<str>>,
+    pub name: Option<String>,
     /// How to show the image after upload.
     pub preview_style: ImagePreviewStyle,
 }
@@ -118,7 +118,7 @@ pub enum ImagePreviewStyle {
 #[derive(Debug, Deserialize, Serialize)]
 pub struct FormInputMarkdown {
     /// What to put in form-data for the API.
-    pub name: Arc<str>,
+    pub name: String,
     /// Minimum character count.
     pub length_min: Option<i32>,
     /// Maximum character count.
@@ -131,7 +131,7 @@ pub struct FormInputMarkdown {
 #[derive(Debug, Deserialize, Serialize)]
 pub struct FormInputRadio {
     /// What to put in form-data for the API.
-    pub name: Arc<str>,
+    pub name: String,
     /// Individual selectable options.
     pub options: Vec<RadioButton>,
 }
@@ -140,16 +140,16 @@ pub struct FormInputRadio {
 #[derive(Debug, Deserialize, Serialize)]
 pub struct RadioButton {
     /// What to put in form-data for the API.
-    pub value: Arc<str>,
+    pub value: String,
     /// Human-readable text for option.
-    pub title: Option<Arc<str>>,
+    pub title: Option<String>,
 }
 
 /// Toggle on or off.
 #[derive(Debug, Deserialize, Serialize)]
 pub struct FormInputCheckbox {
     /// What to put in form-data for the API.
-    pub name: Arc<str>,
+    pub name: String,
     /// Should it start checked.
     pub default_checked: Option<bool>,
 }

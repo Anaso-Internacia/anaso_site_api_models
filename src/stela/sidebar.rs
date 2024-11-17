@@ -1,5 +1,3 @@
-use std::sync::Arc;
-
 use serde::{Deserialize, Serialize};
 
 use crate::stela::VisualMotion;
@@ -15,9 +13,9 @@ pub struct Sidebar {
 #[derive(Debug, Deserialize, Serialize)]
 pub struct SidebarCard {
     /// Headr text at the top.
-    pub title: Arc<str>,
+    pub title: String,
     /// Main text.
-    pub body: Arc<str>,
+    pub body: String,
     /// Buttons underneath body.
     pub motions: Vec<VisualMotion>,
 }

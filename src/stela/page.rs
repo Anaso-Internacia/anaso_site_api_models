@@ -11,14 +11,14 @@ use crate::stela::{Hero, Sidebar, SocialData, VisualSection};
 pub struct Page {
     /// The title of the page.
     #[serde_as(as = "DefaultOnError")]
-    pub title: Option<Arc<str>>,
+    pub title: Option<String>,
     /// What language is the page itself in.
     ///
     /// Individual sections can still have their own languages.
     ///
     /// This is an `ISO-639` locale code, such as `en`, `eo`, `es`, `fr`.
     #[serde_as(as = "DefaultOnError")]
-    pub lang: Option<Arc<str>>,
+    pub lang: Option<String>,
     /// Info for the meta tags.
     #[serde_as(as = "DefaultOnError")]
     pub social: Option<Arc<SocialData>>,

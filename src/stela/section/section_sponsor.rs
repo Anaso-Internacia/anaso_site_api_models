@@ -1,5 +1,3 @@
-use std::sync::Arc;
-
 use serde::{Deserialize, Serialize};
 
 use crate::stela::Motion;
@@ -8,11 +6,11 @@ use crate::stela::Motion;
 #[derive(Debug, Deserialize, Serialize)]
 pub struct SectionSponsor {
     /// The word "Sponsor".
-    pub sponsor_text: Arc<str>,
+    pub sponsor_text: String,
     /// Company/brand being sponosored.
-    pub name: Arc<str>,
+    pub name: String,
     /// Primary text.
-    pub text: Arc<str>,
+    pub text: String,
     /// Call-to-action
     pub motions: Vec<Motion>,
 }
