@@ -108,6 +108,13 @@ pub enum Motion {
 /// Call the `motion_interaction` endpoint and do something with the response.
 #[derive(Debug, Deserialize, Serialize)]
 pub struct MotionApiCall {
+    /// Not URL encoded.
+    pub data: String,
+}
+
+/// Call the `motion_interaction` endpoint and do something with the response.
+#[derive(Debug, Deserialize, Serialize)]
+pub struct MotionApiCallResponse {
     /// If `Some`, change the toggle to this new value.
     pub new_toggle: Option<bool>,
     /// Show a pop-up.

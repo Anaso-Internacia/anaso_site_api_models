@@ -1,6 +1,6 @@
 [package]
 name = "anaso_site_api_models"
-version = "0.0.4"
+version = "0.0.5"
 description = "API models for Ana.so"
 license = "MIT OR Apache-2.0"
 authors = ["Brandon Dyer <brandono@ana.so>"]
