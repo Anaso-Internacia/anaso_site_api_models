@@ -2,7 +2,7 @@ use std::sync::Arc;
 
 use serde::{Deserialize, Serialize};
 
-use crate::stela::VisualMotion;
+use crate::stela::{Modal, VisualMotion};
 
 /// Fill something out and submit.
 #[derive(Debug, Deserialize, Serialize)]
@@ -45,6 +45,19 @@ pub enum FormInputVariant {
     #[default]
     #[serde(other)]
     Unknown,
+}
+
+/// Call the `form_submit` endpoint and do something with the response.
+#[derive(Clone, Debug, Deserialize, Serialize)]
+pub struct FormResponse {
+    /// Show an error.
+    pub error: Option<String>,
+    /// Show a pop-up.
+    pub modal: Option<Arc<Modal>>,
+    /// Send the user to the given URI.
+    pub redirect: Option<String>,
+    /// Hide the form and show this text.
+    pub success: Option<String>,
 }
 
 /// A smaller form with a title inside the full form.

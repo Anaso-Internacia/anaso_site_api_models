@@ -4,7 +4,7 @@ version = 3
 
 [[package]]
 name = "anaso_site_api_models"
-version = "0.0.5"
+version = "0.0.6"
 dependencies = [
  "bitflags",
  "serde",
