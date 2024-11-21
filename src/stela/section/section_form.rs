@@ -1,4 +1,4 @@
-use std::sync::Arc;
+use std::{collections::HashMap, sync::Arc};
 
 use serde::{Deserialize, Serialize};
 
@@ -11,6 +11,12 @@ pub struct SectionForm {
     pub header: Option<String>,
     /// Secondary text under header.
     pub subheader: Option<String>,
+    /// Which form is this.
+    ///
+    /// Arbitrary, unstructured data. Provided by API.
+    pub form_name: String,
+    /// Arbitrary, unstructured data. Provided by API.
+    pub extra_data: Option<String>,
     /// Individual input fields.
     pub inputs: Vec<FormInput>,
 }
@@ -45,6 +51,19 @@ pub enum FormInputVariant {
     #[default]
     #[serde(other)]
     Unknown,
+}
+
+/// Data to pass to the `form_submit()` server function.
+#[derive(Clone, Debug, Deserialize, Serialize)]
+pub struct FormCallData {
+    /// Which form is this.
+    ///
+    /// Arbitrary, unstructured data. Provided by API.
+    pub form_name: String,
+    /// Arbitrary, unstructured data. Provided by API.
+    pub extra_data: Option<String>,
+    /// The values of the form fields as entered by the user.
+    pub fields: HashMap<String, String>,
 }
 
 /// Call the `form_submit` endpoint and do something with the response.
