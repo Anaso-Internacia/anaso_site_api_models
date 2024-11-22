@@ -17,6 +17,8 @@ pub struct SectionForm {
     pub form_name: String,
     /// Arbitrary, unstructured data. Provided by API.
     pub extra_data: Option<String>,
+    /// Text to show in the `<noscript>` tag.
+    pub noscript_text: Option<String>,
     /// Individual input fields.
     pub inputs: Vec<FormInput>,
 }
@@ -35,6 +37,8 @@ pub struct FormInput {
 pub enum FormInputVariant {
     /// Toggle on or off.
     Checkbox(Arc<FormInputCheckbox>),
+    /// Cloudflare Turnstile
+    CfTurnstile(Arc<FormInputCfTurnstile>),
     /// Upload an image.
     Image(Arc<FormInputImage>),
     /// Type full markdown.
@@ -184,6 +188,21 @@ pub struct FormInputCheckbox {
     pub name: String,
     /// Should it start checked.
     pub default_checked: Option<bool>,
+}
+
+/// Cloudflare Turnstile
+#[derive(Debug, Deserialize, Serialize)]
+pub struct FormInputCfTurnstile {
+    /// Attribute `class`
+    pub class: Option<String>,
+    /// Attribute `data-sitekey`
+    pub sitekey: String,
+    /// Attribute `data-response-field-name`
+    pub response_field_name: Option<String>,
+    /// Attribute `data-size`
+    pub size: Option<String>,
+    /// Attribute `data-language`
+    pub language: Option<String>,
 }
 
 /// A list of motions.
