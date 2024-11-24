@@ -23,18 +23,9 @@ pub struct SectionForm {
     pub inputs: Vec<FormInput>,
 }
 
-/// Individual input field.
-#[derive(Clone, Debug, Deserialize, Serialize)]
-pub struct FormInput {
-    /// Human-readable name.
-    pub title: Option<String>,
-    /// What kind of field is it.
-    pub variant: FormInputVariant,
-}
-
 /// What kind of input it is with needed extra info.
 #[derive(Clone, Debug, Default, Deserialize, Serialize)]
-pub enum FormInputVariant {
+pub enum FormInput {
     /// Toggle on or off.
     Checkbox(Arc<FormInputCheckbox>),
     /// Cloudflare Turnstile
@@ -86,6 +77,8 @@ pub struct FormResponse {
 /// A smaller form with a title inside the full form.
 #[derive(Debug, Deserialize, Serialize)]
 pub struct FormInputSubsection {
+    /// Human-readable name.
+    pub title: Option<String>,
     /// Individual input fields.
     pub inputs: Vec<FormInput>,
 }
@@ -93,6 +86,8 @@ pub struct FormInputSubsection {
 /// This is a text field
 #[derive(Debug, Deserialize, Serialize)]
 pub struct FormInputText {
+    /// Human-readable name.
+    pub title: Option<String>,
     /// What to put in form-data for the API.
     pub name: Option<String>,
     /// Minimum character count.
@@ -129,6 +124,8 @@ bitflags::bitflags! {
 /// Upload an image.
 #[derive(Debug, Deserialize, Serialize)]
 pub struct FormInputImage {
+    /// Human-readable name.
+    pub title: Option<String>,
     /// What to put in form-data for the API.
     pub name: Option<String>,
     /// How to show the image after upload.
@@ -153,6 +150,8 @@ pub enum ImagePreviewStyle {
 /// Write large body text as markdown.
 #[derive(Debug, Deserialize, Serialize)]
 pub struct FormInputMarkdown {
+    /// Human-readable name.
+    pub title: Option<String>,
     /// What to put in form-data for the API.
     pub name: String,
     /// Minimum character count.
@@ -166,6 +165,8 @@ pub struct FormInputMarkdown {
 /// Can only select one.
 #[derive(Debug, Deserialize, Serialize)]
 pub struct FormInputRadio {
+    /// Human-readable name.
+    pub title: Option<String>,
     /// What to put in form-data for the API.
     pub name: String,
     /// Individual selectable options.
@@ -184,6 +185,8 @@ pub struct RadioButton {
 /// Toggle on or off.
 #[derive(Debug, Deserialize, Serialize)]
 pub struct FormInputCheckbox {
+    /// Human-readable name.
+    pub title: Option<String>,
     /// What to put in form-data for the API.
     pub name: String,
     /// Should it start checked.
