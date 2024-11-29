@@ -62,7 +62,7 @@ pub struct FormCallData {
 }
 
 /// Call the `form_submit` endpoint and do something with the response.
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
 pub struct FormResponse {
     /// Show an error.
     pub error: Option<String>,
@@ -90,6 +90,8 @@ pub struct FormInputText {
     pub title: Option<String>,
     /// What to put in form-data for the API.
     pub name: Option<String>,
+    /// Value to start with.
+    pub initial_value: Option<String>,
     /// Minimum character count.
     pub length_min: Option<i32>,
     /// Maximum character count.

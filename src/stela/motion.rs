@@ -30,6 +30,8 @@ pub enum MotionIcon {
     GlobeHemisphereWest,
     /// phosphor: heart
     Heart,
+    /// phosphor: house,
+    House,
     /// phosphor: plus
     Plus,
     /// phosphor: push-pin
