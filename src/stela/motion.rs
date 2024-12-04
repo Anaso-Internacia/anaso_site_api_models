@@ -119,6 +119,8 @@ pub struct MotionApiCall {
 pub struct MotionApiCallResponse {
     /// If `Some`, change the toggle to this new value.
     pub new_toggle: Option<bool>,
+    /// If `Some`, change the text to this new value.
+    pub new_text: Option<String>,
     /// Show a pop-up.
     pub modal: Option<Arc<Modal>>,
     /// Send the user to the given URI.
