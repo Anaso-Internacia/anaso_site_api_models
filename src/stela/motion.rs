@@ -32,6 +32,8 @@ pub enum MotionIcon {
     Heart,
     /// phosphor: house,
     House,
+    /// phosphor: magnifying-glass
+    MagnifyingGlass,
     /// phosphor: plus
     Plus,
     /// phosphor: push-pin

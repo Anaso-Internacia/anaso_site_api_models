@@ -3,15 +3,14 @@ use serde::{Deserialize, Serialize};
 /// Website meta tags.
 #[derive(Debug, Deserialize, Serialize)]
 pub struct SocialData {
-    /// Key-value pairs.
-    ///
-    /// Example:
-    /// ```text
-    /// [
-    ///     ("og:title", "a/Hejmo"),
-    ///     ("og:description", "La socia retejo nur por Esperantistoj"),
-    ///     ("og:url", "https://ana.so/a/Hejmo"),
-    /// ]
-    /// ```
-    pub tags: Vec<(String, String)>,
+    /// `name`, `og:title`, `twitter:title`
+    pub title: Option<String>,
+    /// `description`, `og:description`, `twitter:description`
+    pub description: Option<String>,
+    /// `image`, `og:image`, `twitter:image`
+    pub image: Option<String>,
+    /// `og:url`
+    pub url: Option<String>,
+    /// `twitter:card`
+    pub twitter_card: Option<String>,
 }
