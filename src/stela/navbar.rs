@@ -13,6 +13,8 @@ pub struct Navbar {
     pub left_side_secondary_text: Option<String>,
     /// Motion for when search bar is clicked.
     pub search_motion: Option<Motion>,
+    /// Text inside the search bar.
+    pub search_text: Option<String>,
     /// Buttons on right side of navbar.
     pub right_side_motions: Vec<VisualMotion>,
     /// Buttons in side nav.

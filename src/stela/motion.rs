@@ -24,6 +24,8 @@ pub struct VisualMotion {
 /// Show an icon as part of the motion.
 #[derive(Clone, Debug, Default, Deserialize, Serialize, PartialEq, Eq)]
 pub enum MotionIcon {
+    /// phosphor: bell
+    Bell,
     /// phosphor: chat-circle
     ChatCircle,
     /// phosphor: globe-hemisphere-west
