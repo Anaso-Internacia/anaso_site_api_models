@@ -30,6 +30,8 @@ pub enum FormInput {
     Checkbox(Arc<FormInputCheckbox>),
     /// Cloudflare Turnstile
     CfTurnstile(Arc<FormInputCfTurnstile>),
+    /// Upload image or paste a link.
+    Tabs(Arc<FormInputTabs>),
     /// Upload an image.
     Image(Arc<FormInputImage>),
     /// Type full markdown.
@@ -208,6 +210,22 @@ pub struct FormInputCfTurnstile {
     pub size: Option<String>,
     /// Attribute `data-language`
     pub language: Option<String>,
+}
+
+/// Tabs of multiple optional inputs
+#[derive(Debug, Deserialize, Serialize)]
+pub struct FormInputTabs {
+    /// Labeled tabs
+    pub tabs: Vec<FormInputTab>,
+}
+
+/// Labeled form tab
+#[derive(Debug, Deserialize, Serialize)]
+pub struct FormInputTab {
+    /// Tab label
+    pub title: String,
+    /// Input shown when tab selected.
+    pub input: FormInput,
 }
 
 /// A list of motions.
