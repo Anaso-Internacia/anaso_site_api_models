@@ -4,6 +4,8 @@ use serde::{Deserialize, Serialize};
 
 use crate::stela::Modal;
 
+use super::Image;
+
 /// Display a motion as a button.
 #[derive(Clone, Debug, Deserialize, Serialize)]
 pub struct VisualMotion {
@@ -11,6 +13,8 @@ pub struct VisualMotion {
     pub title: Option<String>,
     /// Slug for the button icon.
     pub icon: Option<MotionIcon>,
+    /// ID for associated image.
+    pub image: Option<Image>,
     /// Whether the button should be in a toggled on state initially.
     pub initial_toggle: Option<bool>,
     /// How to display the motion.
