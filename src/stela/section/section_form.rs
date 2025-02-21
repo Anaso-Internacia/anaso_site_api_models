@@ -2,7 +2,7 @@ use std::{collections::HashMap, sync::Arc};
 
 use serde::{Deserialize, Serialize};
 
-use crate::stela::{Modal, VisualMotion};
+use crate::stela::{Image, Modal, VisualMotion};
 
 /// Fill something out and submit.
 #[derive(Debug, Deserialize, Serialize)]
@@ -132,6 +132,8 @@ pub struct FormInputImage {
     pub title: Option<String>,
     /// What to put in form-data for the API.
     pub name: Option<String>,
+    /// Image to start with.
+    pub initial_image: Option<Image>,
     /// How to show the image after upload.
     pub preview_style: ImagePreviewStyle,
 }
@@ -158,6 +160,8 @@ pub struct FormInputMarkdown {
     pub title: Option<String>,
     /// What to put in form-data for the API.
     pub name: String,
+    /// Text to start with.
+    pub initial_value: Option<String>,
     /// Minimum character count.
     pub length_min: Option<i32>,
     /// Maximum character count.
@@ -173,6 +177,8 @@ pub struct FormInputRadio {
     pub title: Option<String>,
     /// What to put in form-data for the API.
     pub name: String,
+    /// Index of initial value.
+    pub initial_index: Option<usize>,
     /// Individual selectable options.
     pub options: Vec<RadioButton>,
 }
@@ -217,6 +223,8 @@ pub struct FormInputCfTurnstile {
 pub struct FormInputTabs {
     /// Labeled tabs
     pub tabs: Vec<FormInputTab>,
+    /// Start with the tab of this index shown.
+    pub initial_index: Option<usize>,
 }
 
 /// Labeled form tab
