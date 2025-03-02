@@ -3,7 +3,7 @@ use serde::{Deserialize, Serialize};
 use crate::stela::{Image, Motion, VisualMotion};
 
 /// Representation of data and buttons on the top/side navbars.
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(bon::Builder, Debug, Deserialize, Serialize)]
 pub struct Navbar {
     /// Motion for when left icon image is selected.
     pub left_side_motion: Motion,

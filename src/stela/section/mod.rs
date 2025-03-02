@@ -17,7 +17,7 @@ mod section_tiles;
 
 /// A blob of UI with some generic display info.
 #[serde_as]
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(bon::Builder, Clone, Debug, Deserialize, Serialize)]
 pub struct VisualSection {
     /// Name to display for the section.
     pub title: Option<String>,

@@ -3,7 +3,7 @@ use serde::{Deserialize, Serialize};
 use crate::stela::{Image, VisualMotion};
 
 /// Some grand information.
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(bon::Builder, Debug, Deserialize, Serialize)]
 pub struct Hero {
     /// Image to show on light theme.
     pub primary_image_light: Option<Image>,

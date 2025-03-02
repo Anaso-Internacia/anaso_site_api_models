@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 use crate::stela::{Image, Modal, VisualMotion};
 
 /// Fill something out and submit.
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(bon::Builder, Debug, Deserialize, Serialize)]
 pub struct SectionForm {
     /// Primary text at top.
     pub header: Option<String>,
@@ -51,7 +51,7 @@ pub enum FormInput {
 }
 
 /// Data to pass to the `form_submit()` server function.
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(bon::Builder, Clone, Debug, Deserialize, Serialize)]
 pub struct FormCallData {
     /// Which form is this.
     ///
@@ -64,7 +64,7 @@ pub struct FormCallData {
 }
 
 /// Call the `form_submit` endpoint and do something with the response.
-#[derive(Clone, Debug, Default, Deserialize, Serialize)]
+#[derive(bon::Builder, Clone, Debug, Default, Deserialize, Serialize)]
 pub struct FormResponse {
     /// Show an error.
     pub error: Option<String>,
@@ -77,7 +77,7 @@ pub struct FormResponse {
 }
 
 /// A smaller form with a title inside the full form.
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(bon::Builder, Debug, Deserialize, Serialize)]
 pub struct FormInputSubsection {
     /// Human-readable name.
     pub title: Option<String>,
@@ -86,7 +86,7 @@ pub struct FormInputSubsection {
 }
 
 /// This is a text field
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(bon::Builder, Debug, Deserialize, Serialize)]
 pub struct FormInputText {
     /// Human-readable name.
     pub title: Option<String>,
@@ -126,7 +126,7 @@ bitflags::bitflags! {
 }
 
 /// Upload an image.
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(bon::Builder, Debug, Deserialize, Serialize)]
 pub struct FormInputImage {
     /// Human-readable name.
     pub title: Option<String>,
@@ -154,7 +154,7 @@ pub enum ImagePreviewStyle {
 }
 
 /// Write large body text as markdown.
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(bon::Builder, Debug, Deserialize, Serialize)]
 pub struct FormInputMarkdown {
     /// Human-readable name.
     pub title: Option<String>,
@@ -171,7 +171,7 @@ pub struct FormInputMarkdown {
 /// Select from multiple options.
 ///
 /// Can only select one.
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(bon::Builder, Debug, Deserialize, Serialize)]
 pub struct FormInputRadio {
     /// Human-readable name.
     pub title: Option<String>,
@@ -184,7 +184,7 @@ pub struct FormInputRadio {
 }
 
 /// An individual radio button.
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(bon::Builder, Debug, Deserialize, Serialize)]
 pub struct RadioButton {
     /// What to put in form-data for the API.
     pub value: String,
@@ -193,7 +193,7 @@ pub struct RadioButton {
 }
 
 /// Toggle on or off.
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(bon::Builder, Debug, Deserialize, Serialize)]
 pub struct FormInputCheckbox {
     /// Human-readable name.
     pub title: Option<String>,
@@ -204,7 +204,7 @@ pub struct FormInputCheckbox {
 }
 
 /// Cloudflare Turnstile
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(bon::Builder, Debug, Deserialize, Serialize)]
 pub struct FormInputCfTurnstile {
     /// Attribute `class`
     pub class: Option<String>,
@@ -219,7 +219,7 @@ pub struct FormInputCfTurnstile {
 }
 
 /// Tabs of multiple optional inputs
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(bon::Builder, Debug, Deserialize, Serialize)]
 pub struct FormInputTabs {
     /// Labeled tabs
     pub tabs: Vec<FormInputTab>,
@@ -228,7 +228,7 @@ pub struct FormInputTabs {
 }
 
 /// Labeled form tab
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(bon::Builder, Debug, Deserialize, Serialize)]
 pub struct FormInputTab {
     /// Tab label
     pub title: String,
@@ -237,7 +237,7 @@ pub struct FormInputTab {
 }
 
 /// A list of motions.
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(bon::Builder, Debug, Deserialize, Serialize)]
 pub struct FormInputMotions {
     /// Show vertically instead of horizontally.
     pub vertical_list: Option<bool>,

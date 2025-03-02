@@ -3,7 +3,7 @@ use serde::{Deserialize, Serialize};
 use crate::stela::Motion;
 
 /// Ads. Gotta make money.
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(bon::Builder, Debug, Deserialize, Serialize)]
 pub struct SectionSponsor {
     /// The word "Sponsor".
     pub sponsor_text: String,

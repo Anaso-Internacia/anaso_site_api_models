@@ -3,7 +3,7 @@ use serde::{Deserialize, Serialize};
 use crate::stela::{Image, Motion, VisualMotion};
 
 /// User-generated content.
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(bon::Builder, Debug, Deserialize, Serialize)]
 pub struct SectionPost {
     /// Header text.
     pub title: Option<String>,

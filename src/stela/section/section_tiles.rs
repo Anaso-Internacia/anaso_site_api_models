@@ -3,7 +3,7 @@ use serde::{Deserialize, Serialize};
 use crate::stela::{Image, Motion};
 
 /// List of clickable tiles.
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(bon::Builder, Debug, Deserialize, Serialize)]
 pub struct SectionTiles {
     /// The list of tiles.
     pub tiles: Vec<Tile>,
@@ -14,7 +14,7 @@ pub struct SectionTiles {
 /// Individual clickable tile.
 ///
 /// See [`SectionTiles`].
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(bon::Builder, Debug, Deserialize, Serialize)]
 pub struct Tile {
     /// Primary text.
     pub header: Option<String>,

@@ -1,6 +1,6 @@
 [package]
 name = "anaso_site_api_models"
-version = "0.0.17"
+version = "0.0.18"
 description = "API models for Ana.so"
 license = "MIT OR Apache-2.0"
 authors = ["Brandon Dyer <brandono@ana.so>"]
@@ -9,5 +9,6 @@ edition = "2021"
 
 [dependencies]
 bitflags = { version = "2.6", features = ["serde"] }
+bon = "3.3.2"
 serde = { version = "1", features = ["derive", "rc"] }
 serde_with = "3"
