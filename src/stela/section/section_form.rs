@@ -4,6 +4,8 @@ use serde::{Deserialize, Serialize};
 
 use crate::stela::{Image, Modal, VisualMotion};
 
+use super::Section;
+
 /// Fill something out and submit.
 #[derive(bon::Builder, Debug, Deserialize, Serialize)]
 pub struct SectionForm {
@@ -21,6 +23,12 @@ pub struct SectionForm {
     pub noscript_text: Option<String>,
     /// Individual input fields.
     pub inputs: Vec<FormInput>,
+}
+
+impl From<SectionForm> for Section {
+    fn from(value: SectionForm) -> Self {
+        Section::Form(value.into())
+    }
 }
 
 /// What kind of input it is with needed extra info.
@@ -85,6 +93,12 @@ pub struct FormInputSubsection {
     pub inputs: Vec<FormInput>,
 }
 
+impl From<FormInputSubsection> for FormInput {
+    fn from(value: FormInputSubsection) -> Self {
+        FormInput::Subsection(value.into())
+    }
+}
+
 /// This is a text field
 #[derive(bon::Builder, Debug, Deserialize, Serialize)]
 pub struct FormInputText {
@@ -102,6 +116,12 @@ pub struct FormInputText {
     pub esperanto: bool,
     /// Filter out certain letters.
     pub filter: Option<TextFilter>,
+}
+
+impl From<FormInputText> for FormInput {
+    fn from(value: FormInputText) -> Self {
+        FormInput::Text(value.into())
+    }
 }
 
 bitflags::bitflags! {
@@ -138,6 +158,12 @@ pub struct FormInputImage {
     pub preview_style: ImagePreviewStyle,
 }
 
+impl From<FormInputImage> for FormInput {
+    fn from(value: FormInputImage) -> Self {
+        FormInput::Image(value.into())
+    }
+}
+
 /// How to show an image after upload.
 #[derive(Clone, Copy, Debug, Default, Deserialize, Serialize, PartialEq)]
 pub enum ImagePreviewStyle {
@@ -168,6 +194,12 @@ pub struct FormInputMarkdown {
     pub length_max: Option<i32>,
 }
 
+impl From<FormInputMarkdown> for FormInput {
+    fn from(value: FormInputMarkdown) -> Self {
+        FormInput::Markdown(value.into())
+    }
+}
+
 /// Select from multiple options.
 ///
 /// Can only select one.
@@ -181,6 +213,12 @@ pub struct FormInputRadio {
     pub initial_index: Option<usize>,
     /// Individual selectable options.
     pub options: Vec<RadioButton>,
+}
+
+impl From<FormInputRadio> for FormInput {
+    fn from(value: FormInputRadio) -> Self {
+        FormInput::Radio(value.into())
+    }
 }
 
 /// An individual radio button.
@@ -203,6 +241,12 @@ pub struct FormInputCheckbox {
     pub default_checked: Option<bool>,
 }
 
+impl From<FormInputCheckbox> for FormInput {
+    fn from(value: FormInputCheckbox) -> Self {
+        FormInput::Checkbox(value.into())
+    }
+}
+
 /// Cloudflare Turnstile
 #[derive(bon::Builder, Debug, Deserialize, Serialize)]
 pub struct FormInputCfTurnstile {
@@ -218,6 +262,12 @@ pub struct FormInputCfTurnstile {
     pub language: Option<String>,
 }
 
+impl From<FormInputCfTurnstile> for FormInput {
+    fn from(value: FormInputCfTurnstile) -> Self {
+        FormInput::CfTurnstile(value.into())
+    }
+}
+
 /// Tabs of multiple optional inputs
 #[derive(bon::Builder, Debug, Deserialize, Serialize)]
 pub struct FormInputTabs {
@@ -225,6 +275,12 @@ pub struct FormInputTabs {
     pub tabs: Vec<FormInputTab>,
     /// Start with the tab of this index shown.
     pub initial_index: Option<usize>,
+}
+
+impl From<FormInputTabs> for FormInput {
+    fn from(value: FormInputTabs) -> Self {
+        FormInput::Tabs(value.into())
+    }
 }
 
 /// Labeled form tab
@@ -243,4 +299,10 @@ pub struct FormInputMotions {
     pub vertical_list: Option<bool>,
     /// The list of motions to show.
     pub motions: Vec<VisualMotion>,
+}
+
+impl From<FormInputMotions> for FormInput {
+    fn from(value: FormInputMotions) -> Self {
+        FormInput::Motions(value.into())
+    }
 }

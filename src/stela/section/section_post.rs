@@ -2,6 +2,8 @@ use serde::{Deserialize, Serialize};
 
 use crate::stela::{Image, Motion, VisualMotion};
 
+use super::Section;
+
 /// User-generated content.
 #[derive(bon::Builder, Debug, Deserialize, Serialize)]
 pub struct SectionPost {
@@ -25,4 +27,10 @@ pub struct SectionPost {
     pub motions_br: Vec<VisualMotion>,
     /// Bottom-left motions.
     pub motions_bl: Vec<VisualMotion>,
+}
+
+impl From<SectionPost> for Section {
+    fn from(value: SectionPost) -> Self {
+        Section::Post(value.into())
+    }
 }

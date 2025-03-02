@@ -2,6 +2,8 @@ use serde::{Deserialize, Serialize};
 
 use crate::stela::{Image, Motion};
 
+use super::Section;
+
 /// List of clickable tiles.
 #[derive(bon::Builder, Debug, Deserialize, Serialize)]
 pub struct SectionTiles {
@@ -9,6 +11,12 @@ pub struct SectionTiles {
     pub tiles: Vec<Tile>,
     /// How to layout the tiles.
     pub layout: TilesLayout,
+}
+
+impl From<SectionTiles> for Section {
+    fn from(value: SectionTiles) -> Self {
+        Section::Tiles(value.into())
+    }
 }
 
 /// Individual clickable tile.

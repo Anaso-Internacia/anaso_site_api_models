@@ -2,6 +2,8 @@ use serde::{Deserialize, Serialize};
 
 use crate::stela::Motion;
 
+use super::Section;
+
 /// Ads. Gotta make money.
 #[derive(bon::Builder, Debug, Deserialize, Serialize)]
 pub struct SectionSponsor {
@@ -13,4 +15,10 @@ pub struct SectionSponsor {
     pub text: String,
     /// Call-to-action
     pub motions: Vec<Motion>,
+}
+
+impl From<SectionSponsor> for Section {
+    fn from(value: SectionSponsor) -> Self {
+        Section::Sponsor(value.into())
+    }
 }

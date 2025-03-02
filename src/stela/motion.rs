@@ -22,6 +22,7 @@ pub struct VisualMotion {
     /// What color should it be.
     pub color: MotionColor,
     /// The motion to perform when clicked.
+    #[builder(into)]
     pub motion: Motion,
 }
 
@@ -122,6 +123,12 @@ pub struct MotionApiCall {
     pub data: String,
 }
 
+impl From<MotionApiCall> for Motion {
+    fn from(value: MotionApiCall) -> Self {
+        Motion::ApiCall(Arc::new(value))
+    }
+}
+
 /// Call the `motion_interaction` endpoint and do something with the response.
 #[derive(bon::Builder, Debug, Deserialize, Serialize)]
 pub struct MotionApiCallResponse {
@@ -144,6 +151,12 @@ pub struct MotionHref {
     pub new_tab: Option<bool>,
 }
 
+impl From<MotionHref> for Motion {
+    fn from(value: MotionHref) -> Self {
+        Motion::Href(Arc::new(value))
+    }
+}
+
 /// Show a share dialogue.
 #[derive(bon::Builder, Debug, Deserialize, Serialize)]
 pub struct MotionShare {
@@ -155,6 +168,18 @@ pub struct MotionShare {
     pub url: Option<String>,
 }
 
+impl From<MotionShare> for Motion {
+    fn from(value: MotionShare) -> Self {
+        Motion::Share(Arc::new(value))
+    }
+}
+
 /// Submit the form.
 #[derive(bon::Builder, Debug, Deserialize, Serialize)]
 pub struct MotionSubmit {}
+
+impl From<MotionSubmit> for Motion {
+    fn from(value: MotionSubmit) -> Self {
+        Motion::Submit(Arc::new(value))
+    }
+}
