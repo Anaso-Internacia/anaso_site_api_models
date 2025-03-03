@@ -7,7 +7,7 @@ use crate::stela::{Hero, Sidebar, SocialData, VisualSection};
 
 /// An entire page.
 #[serde_as]
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(bon::Builder, Debug, Deserialize, Serialize)]
 pub struct Page {
     /// The title of the page.
     #[serde_as(as = "DefaultOnError")]

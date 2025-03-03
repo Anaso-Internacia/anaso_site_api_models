@@ -7,7 +7,7 @@ use crate::stela::Modal;
 use super::Image;
 
 /// Display a motion as a button.
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(bon::Builder, Clone, Debug, Deserialize, Serialize)]
 pub struct VisualMotion {
     /// Primary button text.
     pub title: Option<String>,
@@ -22,6 +22,7 @@ pub struct VisualMotion {
     /// What color should it be.
     pub color: MotionColor,
     /// The motion to perform when clicked.
+    #[builder(into)]
     pub motion: Motion,
 }
 
@@ -116,14 +117,20 @@ pub enum Motion {
 }
 
 /// Call the `motion_interaction` endpoint and do something with the response.
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(bon::Builder, Debug, Deserialize, Serialize)]
 pub struct MotionApiCall {
     /// Not URL encoded.
     pub data: String,
 }
 
+impl From<MotionApiCall> for Motion {
+    fn from(value: MotionApiCall) -> Self {
+        Motion::ApiCall(Arc::new(value))
+    }
+}
+
 /// Call the `motion_interaction` endpoint and do something with the response.
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(bon::Builder, Debug, Deserialize, Serialize)]
 pub struct MotionApiCallResponse {
     /// If `Some`, change the toggle to this new value.
     pub new_toggle: Option<bool>,
@@ -136,7 +143,7 @@ pub struct MotionApiCallResponse {
 }
 
 /// Navigate to this link.
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(bon::Builder, Debug, Deserialize, Serialize)]
 pub struct MotionHref {
     /// Where to go.
     pub uri: String,
@@ -144,8 +151,14 @@ pub struct MotionHref {
     pub new_tab: Option<bool>,
 }
 
+impl From<MotionHref> for Motion {
+    fn from(value: MotionHref) -> Self {
+        Motion::Href(Arc::new(value))
+    }
+}
+
 /// Show a share dialogue.
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(bon::Builder, Debug, Deserialize, Serialize)]
 pub struct MotionShare {
     /// Title to be shared.
     pub title: Option<String>,
@@ -155,6 +168,18 @@ pub struct MotionShare {
     pub url: Option<String>,
 }
 
+impl From<MotionShare> for Motion {
+    fn from(value: MotionShare) -> Self {
+        Motion::Share(Arc::new(value))
+    }
+}
+
 /// Submit the form.
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(bon::Builder, Debug, Deserialize, Serialize)]
 pub struct MotionSubmit {}
+
+impl From<MotionSubmit> for Motion {
+    fn from(value: MotionSubmit) -> Self {
+        Motion::Submit(Arc::new(value))
+    }
+}

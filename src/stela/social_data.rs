@@ -1,7 +1,7 @@
 use serde::{Deserialize, Serialize};
 
 /// Website meta tags.
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(bon::Builder, Debug, Deserialize, Serialize)]
 pub struct SocialData {
     /// `name`, `og:title`, `twitter:title`
     pub title: Option<String>,

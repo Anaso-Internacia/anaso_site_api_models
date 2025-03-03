@@ -4,8 +4,10 @@ use serde::{Deserialize, Serialize};
 
 use crate::stela::{Image, Modal, VisualMotion};
 
+use super::Section;
+
 /// Fill something out and submit.
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(bon::Builder, Debug, Deserialize, Serialize)]
 pub struct SectionForm {
     /// Primary text at top.
     pub header: Option<String>,
@@ -21,6 +23,12 @@ pub struct SectionForm {
     pub noscript_text: Option<String>,
     /// Individual input fields.
     pub inputs: Vec<FormInput>,
+}
+
+impl From<SectionForm> for Section {
+    fn from(value: SectionForm) -> Self {
+        Section::Form(value.into())
+    }
 }
 
 /// What kind of input it is with needed extra info.
@@ -51,7 +59,7 @@ pub enum FormInput {
 }
 
 /// Data to pass to the `form_submit()` server function.
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(bon::Builder, Clone, Debug, Deserialize, Serialize)]
 pub struct FormCallData {
     /// Which form is this.
     ///
@@ -64,7 +72,7 @@ pub struct FormCallData {
 }
 
 /// Call the `form_submit` endpoint and do something with the response.
-#[derive(Clone, Debug, Default, Deserialize, Serialize)]
+#[derive(bon::Builder, Clone, Debug, Default, Deserialize, Serialize)]
 pub struct FormResponse {
     /// Show an error.
     pub error: Option<String>,
@@ -77,7 +85,7 @@ pub struct FormResponse {
 }
 
 /// A smaller form with a title inside the full form.
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(bon::Builder, Debug, Deserialize, Serialize)]
 pub struct FormInputSubsection {
     /// Human-readable name.
     pub title: Option<String>,
@@ -85,8 +93,14 @@ pub struct FormInputSubsection {
     pub inputs: Vec<FormInput>,
 }
 
+impl From<FormInputSubsection> for FormInput {
+    fn from(value: FormInputSubsection) -> Self {
+        FormInput::Subsection(value.into())
+    }
+}
+
 /// This is a text field
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(bon::Builder, Debug, Deserialize, Serialize)]
 pub struct FormInputText {
     /// Human-readable name.
     pub title: Option<String>,
@@ -102,6 +116,12 @@ pub struct FormInputText {
     pub esperanto: bool,
     /// Filter out certain letters.
     pub filter: Option<TextFilter>,
+}
+
+impl From<FormInputText> for FormInput {
+    fn from(value: FormInputText) -> Self {
+        FormInput::Text(value.into())
+    }
 }
 
 bitflags::bitflags! {
@@ -126,7 +146,7 @@ bitflags::bitflags! {
 }
 
 /// Upload an image.
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(bon::Builder, Debug, Deserialize, Serialize)]
 pub struct FormInputImage {
     /// Human-readable name.
     pub title: Option<String>,
@@ -136,6 +156,12 @@ pub struct FormInputImage {
     pub initial_image: Option<Image>,
     /// How to show the image after upload.
     pub preview_style: ImagePreviewStyle,
+}
+
+impl From<FormInputImage> for FormInput {
+    fn from(value: FormInputImage) -> Self {
+        FormInput::Image(value.into())
+    }
 }
 
 /// How to show an image after upload.
@@ -154,7 +180,7 @@ pub enum ImagePreviewStyle {
 }
 
 /// Write large body text as markdown.
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(bon::Builder, Debug, Deserialize, Serialize)]
 pub struct FormInputMarkdown {
     /// Human-readable name.
     pub title: Option<String>,
@@ -168,10 +194,16 @@ pub struct FormInputMarkdown {
     pub length_max: Option<i32>,
 }
 
+impl From<FormInputMarkdown> for FormInput {
+    fn from(value: FormInputMarkdown) -> Self {
+        FormInput::Markdown(value.into())
+    }
+}
+
 /// Select from multiple options.
 ///
 /// Can only select one.
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(bon::Builder, Debug, Deserialize, Serialize)]
 pub struct FormInputRadio {
     /// Human-readable name.
     pub title: Option<String>,
@@ -183,8 +215,14 @@ pub struct FormInputRadio {
     pub options: Vec<RadioButton>,
 }
 
+impl From<FormInputRadio> for FormInput {
+    fn from(value: FormInputRadio) -> Self {
+        FormInput::Radio(value.into())
+    }
+}
+
 /// An individual radio button.
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(bon::Builder, Debug, Deserialize, Serialize)]
 pub struct RadioButton {
     /// What to put in form-data for the API.
     pub value: String,
@@ -193,7 +231,7 @@ pub struct RadioButton {
 }
 
 /// Toggle on or off.
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(bon::Builder, Debug, Deserialize, Serialize)]
 pub struct FormInputCheckbox {
     /// Human-readable name.
     pub title: Option<String>,
@@ -203,8 +241,14 @@ pub struct FormInputCheckbox {
     pub default_checked: Option<bool>,
 }
 
+impl From<FormInputCheckbox> for FormInput {
+    fn from(value: FormInputCheckbox) -> Self {
+        FormInput::Checkbox(value.into())
+    }
+}
+
 /// Cloudflare Turnstile
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(bon::Builder, Debug, Deserialize, Serialize)]
 pub struct FormInputCfTurnstile {
     /// Attribute `class`
     pub class: Option<String>,
@@ -218,8 +262,14 @@ pub struct FormInputCfTurnstile {
     pub language: Option<String>,
 }
 
+impl From<FormInputCfTurnstile> for FormInput {
+    fn from(value: FormInputCfTurnstile) -> Self {
+        FormInput::CfTurnstile(value.into())
+    }
+}
+
 /// Tabs of multiple optional inputs
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(bon::Builder, Debug, Deserialize, Serialize)]
 pub struct FormInputTabs {
     /// Labeled tabs
     pub tabs: Vec<FormInputTab>,
@@ -227,8 +277,14 @@ pub struct FormInputTabs {
     pub initial_index: Option<usize>,
 }
 
+impl From<FormInputTabs> for FormInput {
+    fn from(value: FormInputTabs) -> Self {
+        FormInput::Tabs(value.into())
+    }
+}
+
 /// Labeled form tab
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(bon::Builder, Debug, Deserialize, Serialize)]
 pub struct FormInputTab {
     /// Tab label
     pub title: String,
@@ -237,10 +293,16 @@ pub struct FormInputTab {
 }
 
 /// A list of motions.
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(bon::Builder, Debug, Deserialize, Serialize)]
 pub struct FormInputMotions {
     /// Show vertically instead of horizontally.
     pub vertical_list: Option<bool>,
     /// The list of motions to show.
     pub motions: Vec<VisualMotion>,
+}
+
+impl From<FormInputMotions> for FormInput {
+    fn from(value: FormInputMotions) -> Self {
+        FormInput::Motions(value.into())
+    }
 }

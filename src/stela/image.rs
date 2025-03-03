@@ -1,7 +1,7 @@
 use serde::{Deserialize, Serialize};
 
 /// Image ID, and other useful info.
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(bon::Builder, Clone, Debug, Deserialize, Serialize)]
 pub struct Image {
     /// Aspect ratio.
     ///
